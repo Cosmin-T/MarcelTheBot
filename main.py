@@ -15,7 +15,7 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 # Token for the bot to authenticate with the Discord API
-token = 'MTExMzA2MDQ1MjM4MjAxOTY2NQ.GnLjiS.KBgc_CwxZnv2ZVUe4UvNfDY2m6-ZzjbfjNGRVQ'
+d_token = 'MTExMzA2MDQ1MjM4MjAxOTY2NQ.GnLjiS.KBgc_CwxZnv2ZVUe4UvNfDY2m6-ZzjbfjNGRVQ'
 
 # Regular expression to recognize website URLs
 url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
@@ -299,19 +299,21 @@ async def on_message(message):
 
   # Deleting user post and posting a new message of what x-user said modified with the link included, less spam
   for website_name in url_mapping:
-    pattern = re.compile(r'\b' + re.escape(website_name) + r'\b', re.IGNORECASE)
+    pattern = re.compile(r'\b' + re.escape(website_name) + r'\b',
+                         re.IGNORECASE)
     if pattern.search(message.content) is not None:
-        print(f'Website name "{website_name}" recognized.')
-        # Recreating the new message
-        new_message = pattern.sub(url_mapping[website_name], message.content)
-        new_message = f"{message.author} said: {new_message}"
-        # Delete the user's original message
-        await message.delete()
-        # Send a new message with the website name replaced by its URL
-        await message.channel.send(new_message)
-        return
-  
+      print(f'Website name "{website_name}" recognized.')
+      # Recreating the new message
+      new_message = pattern.sub(url_mapping[website_name], message.content)
+      new_message = f"{message.author} said: {new_message}"
+      # Delete the user's original message
+      await message.delete()
+      # Send a new message with the website name replaced by its URL
+      await message.channel.send(new_message)
+      return
+
+
 # Keep the bot working forever
 keep_alive()
 # Run the bot
-client.run(token)
+client.run(d_token)
