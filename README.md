@@ -44,10 +44,7 @@ Before you begin, make sure you have the following:
 ### Step 6: Run the Bot
 1. Open a terminal or command prompt.
 2. Navigate to the directory where the bot script is located.
-3. Run the bot script using the following command: bash```python your-bot-script.py```
-
-
-Replace `your-bot-script.py` with the actual name of your bot script.
+3. Run the bot script using the following command: bash ```python main.py```
 
 ## Using the Bot
 
